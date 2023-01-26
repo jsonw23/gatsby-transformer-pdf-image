@@ -18,12 +18,19 @@ const onCreateNode = async ({
 }) => {
   if (node.internal.mediaType === "application/pdf") {
     let pdfNode = node;
-    let pdfImage = new _pdfImage.PDFImage(pdfNode.absolutePath, {
-      convertOptions: {
-        "-trim": ""
-      }
-    });
-    let pageImagePath = await pdfImage.convertPage(0);
+    let pageImagePath = "";
+    try {
+      let pdfImage = new _pdfImage.PDFImage(pdfNode.absolutePath, {
+        convertOptions: {
+          "-trim": ""
+        }
+      });
+      pageImagePath = await pdfImage.convertPage(0);
+    } catch (err) {
+      console.error("error occurred with pdf-image");
+      console.error(err);
+      return;
+    }
     _fs.default.readFile(pageImagePath, async (err, data) => {
       if (err) {
         console.error(err);

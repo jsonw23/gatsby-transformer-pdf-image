@@ -8,12 +8,19 @@ import type { FileSystemNode } from "gatsby-source-filesystem"
 export const onCreateNode: GatsbyNode["onCreateNode"] = async ({ node, actions: { createNode, createNodeField, createParentChildLink }, createNodeId, cache }) => {
     if (node.internal.mediaType === "application/pdf") {
         let pdfNode = node as FileSystemNode
-        let pdfImage = new PDFImage(pdfNode.absolutePath, {
-            convertOptions: {
-                "-trim": ""
-            }
-        })
-        let pageImagePath = await pdfImage.convertPage(0)
+        let pageImagePath = ""
+        try {
+            let pdfImage = new PDFImage(pdfNode.absolutePath, {
+                convertOptions: {
+                    "-trim": ""
+                }
+            })
+            pageImagePath = await pdfImage.convertPage(0)
+        } catch (err) {
+            console.error("error occurred with pdf-image")
+            console.error(err)
+            return
+        }
         fs.readFile(pageImagePath, async (err, data) => {
             if (err) {
                 console.error(err)
