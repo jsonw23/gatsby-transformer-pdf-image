@@ -1,16 +1,31 @@
 {
-  "name": "gatsby-starter-plugin",
-  "version": "1.0.0",
-  "description": "A minimal boilerplate for the essential files Gatsby looks for in a plugin",
+  "name": "gatsby-transformer-pdf-image",
+  "version": "0.1.0",
+  "description": "Generate first-page images from any pdfs for use as a thumbnail",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"No build script setup\""
+    "build": "babel src --out-dir ./dist --ignore \"**/__tests__,**/*.d.ts\" --extensions \".ts,.js\""
   },
   "keywords": [
     "gatsby",
     "gatsby-plugin"
   ],
-  "author": "Kyle Gill <kyle.robert.gill@gmail.com>",
-  "license": "0BSD"
+  "author": "Jason Williams",
+  "license": "0BSD",
+  "dependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@types/node": "^18.11.18",
+    "babel-preset-gatsby-package": "^3.5.0",
+    "pdf-image": "^2.0.0"
+  },
+  "peerDependencies": {
+    "gatsby": "^5.5.0"
+  },
+  "devDependencies": {
+    "@types/pdf-image": "^2.0.1",
+    "gatsby": "^5.5.0",
+    "gatsby-source-filesystem": "^5.5.0"
+  }
 }
