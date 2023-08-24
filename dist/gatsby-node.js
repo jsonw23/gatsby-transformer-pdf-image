@@ -20,11 +20,7 @@ const onCreateNode = async ({
     let pdfNode = node;
     let pageImagePath = "";
     try {
-      let pdfImage = new _pdfImage.PDFImage(pdfNode.absolutePath, {
-        convertOptions: {
-          "-trim": ""
-        }
-      });
+      let pdfImage = new _pdfImage.PDFImage(pdfNode.absolutePath);
       pageImagePath = await pdfImage.convertPage(0);
     } catch (err) {
       console.error("error occurred with pdf-image");
