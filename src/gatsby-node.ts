@@ -10,11 +10,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({ node, actions: 
         let pdfNode = node as FileSystemNode
         let pageImagePath = ""
         try {
-            let pdfImage = new PDFImage(pdfNode.absolutePath, {
-                convertOptions: {
-                    //"-trim": ""
-                }
-            })
+            let pdfImage = new PDFImage(pdfNode.absolutePath)
             pageImagePath = await pdfImage.convertPage(0)
         } catch (err) {
             console.error("error occurred with pdf-image")
