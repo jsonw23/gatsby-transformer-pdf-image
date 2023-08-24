@@ -12,7 +12,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({ node, actions: 
         try {
             let pdfImage = new PDFImage(pdfNode.absolutePath, {
                 convertOptions: {
-                    "-trim": ""
+                    //"-trim": ""
                 }
             })
             pageImagePath = await pdfImage.convertPage(0)
